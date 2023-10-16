@@ -11,3 +11,7 @@ Download the following files from S3
     Arxiv data with metadata json file (since 12/2022 to 08/2023)
 
 pip install -r requirements.txt
+
+python lablab_challenge.py
+
+You can learn how to build the annoy embeddings from generate_embeddings.py, although you do not need it if you are downloading the index from S3 URLs
