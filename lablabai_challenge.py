@@ -187,8 +187,9 @@ def search_endpoint():
     
     query1 = field
     responseA = response2 + "\n" + response1
-    if (len(responseA) > 70000):
-        responseA = responseA[:70000]
+    ## to avoid token limit problem
+    if (len(responseA) > 50000):
+        responseA = responseA[:50000]
    
 
     template = """ Take a deep breath. 
