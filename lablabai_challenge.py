@@ -151,18 +151,13 @@ def search_endpoint():
     template = """ Take a deep breath. 
     You are a researcher in the FIELD of {query}. You are tasked with finding the leading authors in this field. User entered the FIELD. Search engine returned the {response}. Analyze the results and follow the instructions below to identify leading authors in the field of {query} using the CRITERIA below. 
     CRITERIA:
-    1. Author MUST HAVE published at least 2 papers in the FIELD.
-    2. Author MUST HAVE published at least 1 paper in the last 5 years. 
-    3. Author has COLLABORATED with at least 1 other author in the field.
-    4. Author's work has depth in the FIELD and is not superficial.
+    - Author MUST HAVE published at least 2 papers in the FIELD.
+    - Author has COLLABORATED with at least 1 other author in the field.
+    - Author's work has depth in the FIELD and is not superficial.
     OUTPUT
-    1. List of authors that meet the CRITERIA above as a JSON ARRAY following TYPESCRIPT SCHEMA
-    2. It is a JSON array of authors with name, list of IDs of their articles and summary of their work in the FIELD.
-    3. REASON why the author is selected and how their work is relevant in the FIELD in 20 WORDS or less
-    4. Output SHOULD STRICTLY FOLLOW JSON SCHEMA
-    5. Use Emojis, italics and Images to make the output more readable.
-    6. Output should STRICTLY FOLLOW JSON SCHEMA. See TYPESCRIPT SCHEMA below
-
+    - List of authors that meet the CRITERIA above as a JSON ARRAY following TYPESCRIPT SCHEMA
+    - Use Emojis, italics and Images to make the output more readable.
+    - Output should STRICTLY FOLLOW JSON SCHEMA. See TYPESCRIPT SCHEMA below
     SCHEMA
     class Author
         name: string
@@ -207,25 +202,18 @@ def search_endpoint():
     TOP ARTICLES: {responseA}
     INSTRUCTIONS:
   
-    1. User wants to learn about the FIELD of {query1}.
-    3. Read each Article and extract the most important concepts in the FIELD of {query1}.
-    4. Generate a list of domain specific jargons and terminologies that can be used to search for articles in the FIELD of {query1}.
-    5. For each jargon, generate a keyword, explain it with a definition and an example for a BEGINNER.
-    6. For each jargon, include an example ANALOGY that is understandable for a beginner from an ORTHGONAL FIELD
-    7. Output should STRICTLY BE in JSON format following the SCHEMA. 
-    8. Output should be a list of concepts in the order of importance to the FIELD of {query1}. Key concepts should be at the top of the list.
-    9. List upto 100 CONCEPTS and atleast 10 CONCEPTS.
-    10. In the Anology and Definition, YOU MUST USE Emojis, italics and images to make the output more readable.
-    11. Output should STRICTLY FOLLOW JSON SCHEMA. See TYPESCRIPT SCHEMA below, there should be only four fields of keyword, definition, example and analogy.
+    - User wants to learn about the FIELD of {query1}.
+    - Read each Article and extract the most important concepts in the FIELD of {query1}.
+    - Generate a list of domain specific jargons and terminologies that can be used to search for articles in the FIELD of {query1}.
+    - For each jargon, generate a keyword, explain it with a definition and an example for a BEGINNER.
+    - For each jargon, include an example ANALOGY that is understandable for a beginner from an ORTHGONAL FIELD. Output should STRICTLY BE in JSON format following the SCHEMA. 
+    In the Anology and Definition, YOU MUST USE Emojis, italics and images to make the output more readable.
+    Output should STRICTLY FOLLOW JSON SCHEMA. See TYPESCRIPT SCHEMA below, there should be only four fields of keyword, definition, example and analogy.
     Class Output:
         keyword: String,
         definition: String,
         example: String,
         analogy: String
-
-
-    List the concepts in the order of importance to the FIELD of {query1}.
-    For each concept, provide a list of keywords that can be used to search for articles in the FIELD of {query1}.
     """
     prompt = PromptTemplate(template=template, input_variables=["query1", "responseA"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
